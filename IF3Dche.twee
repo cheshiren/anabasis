@@ -235,8 +235,6 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<<addAct "SitOnBike" "Поехали!" ":ArcadeDrive">>
 	<<endif>>
 
-:: ArcadeDrive
-	''Продолжение следует''
 
 :: ScreenInit [nobr]
 	<<set $ScreenName = "Монитор на панели">>
@@ -293,6 +291,10 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<approveAct "HelmetTakeOn">>
 
 
+:: ArcadeDrive
+	''Продолжение следует''
+
+
 
 
 
@@ -346,9 +348,6 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<set $isWindowOpen = 0>>
 :: WindowAfter [nobr]
 	<<approveAct "уааааа" "SwitchesTurnItOn">>
-
-
-
 
 
 
