@@ -21,6 +21,9 @@ a {
 	cursor: pointer;
 	color: #CC9933;
 }
+#passages a.link-external{
+	color: #46D;
+}
 a:hover {
 	color: #CC9933;
 }
