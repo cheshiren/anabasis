@@ -223,7 +223,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<set $SitOnBikeName = "Верхом на байке">>
 	<<set $SitOnBikeTimer = 0>>
 	<<set $SitOnBikeActions = []>>
-	<<set $SitOnBikeEvents = []>>
+	<<set $SitOnBikeEvents = ["1", "2", "3"]>>
 :: SitOnBikeBefore [nobr]
 	<<set $SitOnBikeTimer++>>
 :: SitOnBikeDescription [nobr]
@@ -231,9 +231,20 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	На панели, по сторонам от прямоугольника <<exam "монитора" "Screen">> <<print ($isBikeStarted ? "светились" : "тянулись")>> два ряда <<exam "клавиш" "Switches">>. Изогнутый щиток ветрового стекла <<print ($isBikeStarted ? "мерцал системой навигации" : "был полностью непрозрачным")>>. <<print ($isHelmetOn ? "" : "Сзади, на магнитном захвате в поднимающейся над сидением стойке висел <<exam 'шлем' 'Helmet'>>.")>>
 	<<print ($SitOnBikeTimer == 0 ? "<br>Я покачал байк из стороны в сторону, проверяя подвеску на посторонние звуки, пока не мешал шум двигателя. Всё было нормально." : "")>>
 :: SitOnBikeEvents [nobr]
-	<<if $isBikeStarted and $isHelmetOn>>
-		<<addAct "SitOnBike" "Поехали!" ":ArcadeDrive">>
+	<<if $SitOnBikeChange neq $SitOnBikeTimer>>
+		<<set $SitOnBikeChange = $SitOnBikeTimer>>
+		<<if $isBikeStarted and $isHelmetOn>>
+			<<addAct "SitOnBike" "Поехали!" ":ArcadeDrive">>
+		<<endif>>
+		<<if $SitOnBikeTimer % 2 == 0>>
+			<<set $rand = random($SitOnBikeEvents.length-1)>>
+			<<set $SitOnBikeEvent = "<br>"+$SitOnBikeEvents[$rand]+"<br>">>
+			<<set $SitOnBikeEvents.splice($rand,1)>>
+		<<else>>
+			<<set $SitOnBikeEvent = "">>
+		<<endif>>
 	<<endif>>
+	<<print $SitOnBikeEvent>>
 
 
 :: ScreenInit [nobr]
@@ -249,10 +260,12 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 :: SwitchesDescription [nobr]
 	Эти кнопки контролировали всевозможные системы байка: информацию, которая выводилась на монитор, ветровое стекло или визор шлема, настройку беспроводной связи, свет фары, режимы работы двигателя, голограмму флага и тому подобное.<<print ($isBikeStarted ? "" : " Среди них так же была клавиша, замыкавшая электроцепь для запуска байка.")>>
 :: SwitchesTurnItOn [nobr]
-	<<set $SwitchesTurnItOnDesc = "Я клацнул по бордовой кнопке на панели и зверь подо мной отозвался нарастающим гулом. По мути ветрового стекла разбежались янтарные прожилки, делая его прозрачным. Включилась подсветка клавиш, ожил монитор — на его чернильной поверхности замелькали страницы самодиагностики, а потом и запрос на пароль. Я исполнил над ним несколько сложных пассов, окончательно разблокировав машину, и байк зарычал, прочищая систему выхлопа. Зажглась передняя фара, выхватив из вечерних сумерек стену Аркады в пятнах сложносочинённого графитти.">>
+	<<set $SwitchesTurnItOnDesc = "Я клацнул по бордовой кнопке на панели и зверь подо мной отозвался нарастающим гулом. По мути ветрового стекла разбежались янтарные прожилки, делая его прозрачным. Включилась подсветка клавиш, ожил монитор — на его чернильной поверхности замелькали страницы самодиагностики, а потом и запрос на пароль. Я исполнил над ним несколько сложных пассов, окончательно разблокировав машину, и байк зарычал, прочищая систему выхлопа. Зажглась передняя фара, выхватив из вечерних сумерек стену Аркады в пятнах сложносочинённого граффити">>
 	<<set $isBikeStarted = 1>>
 	<<if $isHelmetOn>>
-		<<set $SwitchesTurnItOnDesc = $SwitchesTurnItOnDesc+"<br><br>Всё, теперь я был готов выезжать.">>
+		<<set $SwitchesTurnItOnDesc = $SwitchesTurnItOnDesc+", я опустил светящийся изнутри визор шлема.<br><br>Всё, теперь я был готов выезжать.">>
+	<<else>>
+		<<set $SwitchesTurnItOnDesc = $SwitchesTurnItOnDesc+".">>
 	<<endif>>
 	<<removeAct "SitOnBike" "SwitchesTurnItOn">>
 :: SwitchesClicking [nobr]
@@ -280,7 +293,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 :: HelmetTakeOn [nobr]
 	<<set $HelmetTakeOnDesc = "Я снял шлем с магнитного захвата и, крутанув в руках, надел. ">>
 	<<if $isBikeStarted>>
-		<<set $HelmetTakeOnDesc = $HelmetTakeOnDesc+"В наушниках раздался секундный писк подключения к системам байка. Я опустил визор.<br><br>Всё, теперь я был готов выезжать.">>
+		<<set $HelmetTakeOnDesc = $HelmetTakeOnDesc+"В наушниках раздался секундный писк подключения к системам байка и я опустил визор. Перед глазами расцвело моё окружение с наложенными на него предметами аугментированной реальности.<br><br>Всё, теперь я был готов выезжать.">>
 	<<else>>
 		<<set $HelmetTakeOnDesc = $HelmetTakeOnDesc+"Байк ещё не был включен, поэтому электронная начинка шлема пока бездействовала.">>
 	<<endif>>
