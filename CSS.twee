@@ -90,6 +90,7 @@ button:active {
 	border-color: #f92;
 }
 abbr {
+	border-bottom: none;
 	/*border-bottom: 1px dotted white;*/ /* подчёркивание под хинтом */
 }
 
