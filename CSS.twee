@@ -21,9 +21,6 @@ a {
 	cursor: pointer;
 	color: #CC9933;
 }
-#passages a.link-external{
-	color: #46D;
-}
 a:hover {
 	color: #CC9933;
 }
@@ -92,7 +89,13 @@ button:active {
 	background-color: #f70;
 	border-color: #f92;
 }
+abbr {
+	/*border-bottom: 1px dotted white;*/ /* подчёркивание под хинтом */
+}
 
+.music a.link-external{
+	color: #46D;
+}
 .error {
 	margin: 0 12px 0 3px;
 	padding: 3px 5px;
@@ -181,7 +184,8 @@ a.link-return:after {
 	content: "\00a0\00a0\e00b";
 }
 #passages a.link-external:after {
-	content: "\00a0\e010";
+	/*content: "\00a0\e010";*/ /* значок внешней ссылки */
+	content: none;
 }
 #menu-saves a:before {
 	content: "\e011\00a0\00a0";
