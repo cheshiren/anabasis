@@ -179,7 +179,3 @@ macros["endwhile"] = {
 } catch(e) { 
   throwError(place,"Macro while Error: "+e.message); 
 }
-
-
-::aaa[script]
-//requires jquery
