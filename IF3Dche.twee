@@ -21,7 +21,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	[[В Аркаде|Arcade]]
 	[[На парковке|MainScreen][$loc="ArcadePark"]]
 	[[Верхом на байке|MainScreen][$loc="SitOnBike"]]
-	[[Выезд от Аркады|ArcadeDrive]]
+	[[Выезд на улицы|ArcadeDrive]]
 	<hr>
 	<<print ($isMusicSeen ? "@@.music;[[Музыка|http://youtu.be/Ag6y6jz7bQQ]]@@" : "")>>
 
